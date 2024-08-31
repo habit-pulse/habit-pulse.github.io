@@ -3,64 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ứng Dụng Quản Lý Thói Quen</title>
+    <title>Interactive Question Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
+            background-color: #f0f0f0;
         }
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
             text-align: center;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        header {
-            background-color: #6200ea;
-            color: #fff;
-            padding: 20px 0;
-        }
-        header h1 {
-            margin: 0;
-        }
-        .features {
-            margin: 20px 0;
-        }
-        .features h2 {
-            color: #6200ea;
-        }
-        .cta-button {
-            background-color: #6200ea;
-            color: #fff;
+        button {
+            margin: 5px;
             padding: 10px 20px;
-            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
             border-radius: 5px;
-            display: inline-block;
+            transition: all 0.3s;
+        }
+        button:hover {
+            transform: scale(1.05);
+        }
+        button:active {
+            transform: scale(0.95);
+        }
+        .yes-button {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #noButton {
+            background-color: #f44336;
+            color: white;
+        }
+        #thankYouMessage {
+            display: none;
+            font-size: 24px;
+            color: #4CAF50;
             margin-top: 20px;
+            animation: fadeIn 1s;
+        }
+        #yesButtonContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes popIn {
+            0% { transform: scale(0); }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Ứng Dụng Quản Lý Thói Quen</h1>
-    </header>
     <div class="container">
-        <p>Quản lý và theo dõi thói quen của bạn một cách dễ dàng với ứng dụng của chúng tôi. Tạo thói quen mới, theo dõi tiến trình và đạt được mục tiêu của bạn.</p>
-        
-        <div class="features">
-            <h2>Tính Năng Chính</h2>
-            <ul>
-                <li>Tạo và quản lý thói quen hàng ngày</li>
-                <li>Theo dõi tiến trình và thành tích</li>
-                <li>Nhắc nhở thông minh</li>
-                <li>Phân tích và báo cáo chi tiết</li>
-            </ul>
+        <h1>Bạn có muốn tiếp tục không?</h1>
+        <div id="yesButtonContainer">
+            <button class="yes-button">Có</button>
         </div>
-        
-        <a href="#" class="cta-button">Bắt đầu ngay</a>
+        <button id="noButton">Không</button>
+        <div id="thankYouMessage">Cảm ơn em!</div>
     </div>
+
+    <script>
+        const yesButtonContainer = document.getElementById('yesButtonContainer');
+        const noButton = document.getElementById('noButton');
+        const thankYouMessage = document.getElementById('thankYouMessage');
+
+        function showThankYouMessage() {
+            yesButtonContainer.style.display = 'none';
+            noButton.style.display = 'none';
+            thankYouMessage.style.display = 'block';
+        }
+
+        function createYesButton() {
+            const newYesButton = document.createElement('button');
+            newYesButton.textContent = 'Có';
+            newYesButton.className = 'yes-button';
+            newYesButton.style.animation = 'popIn 0.5s';
+            newYesButton.addEventListener('click', showThankYouMessage);
+            yesButtonContainer.appendChild(newYesButton);
+        }
+
+        yesButtonContainer.addEventListener('click', function(event) {
+            if (event.target.classList.contains('yes-button')) {
+                showThankYouMessage();
+            }
+        });
+
+        noButton.addEventListener('click', createYesButton);
+    </script>
 </body>
 </html>
