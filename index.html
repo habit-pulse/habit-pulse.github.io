@@ -13,10 +13,13 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+            background-image: url('./thobg_2.jpeg');
+            background-size: cover;
+            background-position: center;
         }
         .container {
             text-align: center;
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.6);
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -69,7 +72,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Bạn có muốn tiếp tục không?</h1>
+        <h1 id="title">Bạn có muốn tiếp tục không?</h1>
         <div id="yesButtonContainer">
             <button class="yes-button">Có</button>
         </div>
@@ -81,11 +84,14 @@
         const yesButtonContainer = document.getElementById('yesButtonContainer');
         const noButton = document.getElementById('noButton');
         const thankYouMessage = document.getElementById('thankYouMessage');
+        const title = document.getElementById('title');
 
         function showThankYouMessage() {
             yesButtonContainer.style.display = 'none';
             noButton.style.display = 'none';
             thankYouMessage.style.display = 'block';
+            document.body.style.backgroundImage = "url('./tho_bg.jpeg')";
+            title.textContent = 'Cảm ơn em!';
         }
 
         function createYesButton() {
@@ -100,6 +106,7 @@
         yesButtonContainer.addEventListener('click', function(event) {
             if (event.target.classList.contains('yes-button')) {
                 showThankYouMessage();
+
             }
         });
 
